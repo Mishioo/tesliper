@@ -2,6 +2,7 @@ from .atoms import (
     atomic_number,
     symbol_of_element,
     validate_atoms,
+    Atom,
 )
 from .energies import (
     Boltzmann,
@@ -26,4 +27,11 @@ from .spectra import (
     gaussian,
     count_imaginary,
     find_imaginary,
+)
+from geometry import (
+    take_atoms,
+    drop_atoms,
+    is_triangular,
+    get_triangular_base,
+    get_triangular,
 )
