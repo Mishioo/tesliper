@@ -13,6 +13,9 @@ from .array_base import (
 from .spectra import Spectra
 
 # LOGGER
+from ..datawork.atoms import atomic_number
+from ..exceptions import InconsistentDataError
+
 logger = lgg.getLogger(__name__)
 logger.setLevel(lgg.DEBUG)
 
@@ -189,6 +192,7 @@ class Energies(FloatArray):
         # convert hartree to kcal/mol by multiplying by 627.5095
         return self.values * dw.energies.HARTREE_TO_KCAL_PER_MOL
 
+    # TODO: property cannot take arguments, fix this
     @property
     def deltas(self, as_kcal_per_mol: bool = True):
         """Calculates energy difference between each conformer and lowest energy
@@ -251,9 +255,8 @@ class Energies(FloatArray):
 
 
 class Averagable:
-    """Mix-in class for DataArrays, that may be averaged based on populations of
-    conformers.
-    """
+    """Mix-in for DataArray subclasses, that may be averaged based on populations
+    of conformers."""
 
     def average_conformers(self: DataArray, energies) -> DataArray:
         """A method for averaging values by population of conformers.
@@ -735,7 +738,8 @@ class Geometry(FloatArray):
         check_against="values",
         check_depth=2,
         # TODO: make sanitizer, that accepts jagged nested sequences
-        fsan=np.vectorize(dw.atoms.atomic_number),
+        fsan=np.vectorize(atomic_number),
+        strict=True,
     )
 
     def __init__(
