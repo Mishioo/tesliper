@@ -5,10 +5,7 @@ from typing import Any, Sequence, Tuple, Union
 import numpy as np
 
 from .. import datawork as dw
-
-# LOGGER
 from ..datawork.atoms import atomic_number
-from ..exceptions import InconsistentDataError
 from .array_base import (
     ArrayBase,
     ArrayProperty,
@@ -17,6 +14,7 @@ from .array_base import (
 )
 from .spectra import Spectra
 
+# LOGGER
 logger = lgg.getLogger(__name__)
 logger.setLevel(lgg.DEBUG)
 
