@@ -1,9 +1,14 @@
 # IMPORTS
 import logging as lgg
-from typing import Sequence, Union, Any, Tuple
+from typing import Any, Sequence, Tuple, Union
 
 import numpy as np
+
 from .. import datawork as dw
+
+# LOGGER
+from ..datawork.atoms import atomic_number
+from ..exceptions import InconsistentDataError
 from .array_base import (
     ArrayBase,
     ArrayProperty,
@@ -11,10 +16,6 @@ from .array_base import (
     JaggedArrayProperty,
 )
 from .spectra import Spectra
-
-# LOGGER
-from ..datawork.atoms import atomic_number
-from ..exceptions import InconsistentDataError
 
 logger = lgg.getLogger(__name__)
 logger.setLevel(lgg.DEBUG)
