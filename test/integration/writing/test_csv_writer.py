@@ -5,10 +5,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from tesliper.writing.csv_writer import CsvWriter, CsvSerialWriter
-from tesliper.glassware import arrays as ar, SingleSpectrum, Spectra
 from tesliper.extraction import Soxhlet
-from tesliper.glassware import Conformers
+from tesliper.glassware import Conformers, SingleSpectrum, Spectra
+from tesliper.glassware import arrays as ar
+from tesliper.writing.csv_writer import CsvSerialWriter, CsvWriter
 
 
 @pytest.fixture
@@ -86,7 +86,13 @@ def gib_no_corr(mols):
     gib = mols.arrayed("gib")
     return (
         gib,
-        zip(gib.filenames, gib.populations, gib.min_factors, gib.deltas, gib.values,),
+        zip(
+            gib.filenames,
+            gib.populations,
+            gib.min_factors,
+            gib.deltas,
+            gib.values,
+        ),
     )
 
 

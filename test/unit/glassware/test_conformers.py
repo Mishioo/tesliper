@@ -1,7 +1,8 @@
+import pytest
+
 from tesliper import glassware as gw
 from tesliper.exceptions import TesliperError
 from tesliper.glassware import conformers as cf
-import pytest
 
 
 @pytest.fixture
@@ -347,7 +348,9 @@ def test_trim_incomplete_wanted(full):
 
 def test_trim_incomplete_strict(full):
     m = gw.Conformers(
-        one={"a": 1, "b": 2}, two={"a": 1, "c": 3}, three={"a": 1, "d": 3},
+        one={"a": 1, "b": 2},
+        two={"a": 1, "c": 3},
+        three={"a": 1, "d": 3},
     )
     assert [True, True, True] == m.kept
     m.trim_incomplete(wanted=["a", "b", "c"])

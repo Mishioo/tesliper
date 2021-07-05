@@ -1,5 +1,5 @@
 import math
-from typing import Sequence, Iterable, Union, Callable
+from typing import Iterable, Sequence, Union
 
 import numpy as np
 
@@ -36,7 +36,8 @@ def find_atoms(
 
 
 def select_atoms(
-    values: Union[Sequence, np.ndarray], indices: Union[Sequence[int], np.ndarray],
+    values: Union[Sequence, np.ndarray],
+    indices: Union[Sequence[int], np.ndarray],
 ) -> np.ndarray:
     """Filter given values to contain values only corresponding to atoms on given
     indices. Recognizes if given values ate list of values for one or many conformers.

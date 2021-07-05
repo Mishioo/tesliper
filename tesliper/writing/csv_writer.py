@@ -1,16 +1,16 @@
 # IMPORTS
 import csv
 import logging as lgg
-from itertools import zip_longest, repeat
+from itertools import repeat, zip_longest
 from pathlib import Path
 from string import Template
-from typing import Union, List, Optional, Dict
+from typing import Dict, List, Optional, Union
 
 import numpy as np
 
-from ._writer import Writer, SerialWriter
+from ..glassware.arrays import Bars, Energies, ExcitedStateBars, FloatArray, Transitions
 from ..glassware.spectra import SingleSpectrum, Spectra
-from ..glassware.arrays import Energies, FloatArray, Bars, Transitions, ExcitedStateBars
+from ._writer import SerialWriter, Writer
 
 # LOGGER
 logger = lgg.getLogger(__name__)
@@ -132,7 +132,9 @@ class CsvWriter(_CsvMixin, Writer):
         )
 
     def energies(
-        self, energies: Energies, corrections: Optional[FloatArray] = None,
+        self,
+        energies: Energies,
+        corrections: Optional[FloatArray] = None,
     ):
         """Writes Energies object to csv file. The output also contains derived values:
         populations, min_factors, deltas. Corrections are added only when explicitly

@@ -1,24 +1,23 @@
 # IMPORTS
 import logging as lgg
+from itertools import chain, repeat, zip_longest
 from pathlib import Path
-from typing import Sequence, Optional, Union, Iterable
+from typing import Iterable, Optional, Sequence, Union
 
 import numpy as np
 import openpyxl as oxl
-from itertools import zip_longest, repeat, chain
 
-from ._writer import Writer
 from ..glassware.arrays import (
-    Energies,
     Bars,
-    InfoArray,
-    FloatArray,
     DataArray,
-    Transitions,
+    Energies,
     ExcitedStateBars,
+    FloatArray,
+    InfoArray,
+    Transitions,
 )
-from ..glassware.spectra import Spectra, SingleSpectrum
-
+from ..glassware.spectra import SingleSpectrum, Spectra
+from ._writer import Writer
 
 # LOGGER
 logger = lgg.getLogger(__name__)
@@ -269,7 +268,9 @@ class XlsxWriter(Writer):
         fmts = [self._excel_formats[wavelengths.genre], "0", "0", "0.0000", "0%"]
 
         for fname, grounds, exciteds, values, contribs, bands in zip(
-            transitions.filenames, *transtions_data, wavelengths.wavelen,
+            transitions.filenames,
+            *transtions_data,
+            wavelengths.wavelen,
         ):
             ws = wb.create_sheet(title=fname)
             ws.append(headers)
