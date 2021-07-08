@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from tesliper import Tesliper, Spectra
+from tesliper import Spectra, Tesliper
 from tesliper.glassware import SingleSpectrum
-from tesliper.writing.serializer import ArchiveWriter, ArchiveLoader
+from tesliper.writing.serializer import ArchiveLoader, ArchiveWriter
 
 fixtures_dir = Path(__file__).parent.parent / "fixtures"
 
@@ -14,7 +14,10 @@ with_args = Tesliper(
     output_dir=fixtures_dir,
     wanted_files=["one_file.out", "two_file.out"],
 )
-with_mols = Tesliper(input_dir=fixtures_dir, wanted_files=["meoh-1.out", "meoh-2.out"],)
+with_mols = Tesliper(
+    input_dir=fixtures_dir,
+    wanted_files=["meoh-1.out", "meoh-2.out"],
+)
 with_mols.extract()
 with_spectra = Tesliper()
 with_spectra.spectra["ir"] = Spectra(
@@ -51,12 +54,12 @@ def test_serialization(tmp_path, tesliper):
     assert resurected.output_dir == tesliper.output_dir
     assert resurected.wanted_files == tesliper.wanted_files
     assert (
-        resurected.molecules.allow_data_inconsistency
-        == tesliper.molecules.allow_data_inconsistency
+        resurected.conformers.allow_data_inconsistency
+        == tesliper.conformers.allow_data_inconsistency
     )
-    assert resurected.molecules.filenames == tesliper.molecules.filenames
-    assert resurected.molecules.kept == tesliper.molecules.kept
-    assert resurected.molecules == tesliper.molecules
+    assert resurected.conformers.filenames == tesliper.conformers.filenames
+    assert resurected.conformers.kept == tesliper.conformers.kept
+    assert resurected.conformers == tesliper.conformers
     # check if all attributes are identical, including numpy arrays
     for genre, spc in resurected.spectra.items():
         for key, value in spc.__dict__.items():
