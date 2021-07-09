@@ -10,7 +10,7 @@ import numpy as np
 
 from ..glassware.arrays import Bars, ElectronicBars, Energies, FloatArray, Transitions
 from ..glassware.spectra import SingleSpectrum, Spectra
-from ._writer import SerialWriter, Writer
+from ._writer import Writer
 
 # LOGGER
 logger = lgg.getLogger(__name__)
@@ -187,7 +187,8 @@ class CsvWriter(_CsvMixin, Writer):
         logger.info("Spectrum export to csv files done.")
 
 
-class CsvSerialWriter(_CsvMixin, SerialWriter):
+class CsvSerialWriter(_CsvMixin):
+    # TODO: unify with CsvWriter
     """Writes extracted data in .csv format, generates separate file for
     each given conformer.
 
